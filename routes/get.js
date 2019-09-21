@@ -1,8 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
+let login = require('../models/login');
+
+
 router.get('/', (req, res)=>{
-    res.send('index');
+    res.render('index');
 })
 
 
