@@ -45,7 +45,7 @@ avoidanceTextArea.value = alltext;
         Allergy Detection
       </h1>
     </div>
-    <img src="avatar.png" style="filter: invert(1); width: 10vw;"></img>
+    <img src="avatar.png" style="width: 10vw;"></img>
   </div>
 <div class="body">
       
@@ -54,18 +54,15 @@ avoidanceTextArea.value = alltext;
         </h2>
       
      <form class="sign-up-form ">
-
-           
-
-
             <div style="display: flex; flex-direction: row; flex-wrap: nowrap;">
-                <textarea id="weakness" placeholder="What can't you eat"></textarea>
+                <%var text = ""; %>
+                    <%for(var i = 1; i<req.session.weakness.length; i++){ %>
+                        <%text += req.session.weakness[i] + ", "; %>
+                    <%} %>
+                <textarea id="weakness"><%= text%></textarea>
             </div>
 
             <div style="display: flex; flex-direction: row; align-items:center ">
-
-
-
                 <select>
                     <option value="placeholder">Dairy</option>
                     <option value="placeholder">Hallal</option>
@@ -73,18 +70,11 @@ avoidanceTextArea.value = alltext;
                     <option value="placeholder">Nuts</option>
                     <option value="placeholder">Shellfish</option>
                     <option value="placeholder">Vegan</option>
-
-
                 </select>
-
                 <button type="button" style="font-size: 15px;">Add Preset</button>
-
-
             </div>
 
-            <button  type="button">Save</button>
-
-
+            <button  type="submit">Save</button>
         </form>
         
         <!-- to do add red button -->
