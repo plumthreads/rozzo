@@ -6,11 +6,6 @@ var session = require('express-session');
 var config = require('./config/database');
 var mongoose = require('mongoose');
 
-//session midedleware
-app.use(cookieParser);
-app.use(session({token: "Session token"}));
-
-
 mongoose.connect(config.database, { useNewUrlParser: true });
 var db = mongoose.connection;
 
@@ -26,11 +21,19 @@ db.on('error', function (err) {
 var app = express();
 
 
+app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 //Body Parser Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+
+
+//session midedleware
+app.use(session({
+    token: "Session token",
+    secret: "Caroline"
+}));
 
 //static folder
 app.use(express.static(path.join(__dirname, '/public')));
@@ -39,10 +42,10 @@ app.use(express.static(path.join(__dirname, '/public')));
 const get = require('./routes/get');
 app.use(get);
 
-/*
+
 var post = require('./routes/post');
 app.use(post);
-*/
+
 
 app.listen(5500, ()=>{
     console.log("Server is on port 57");

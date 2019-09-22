@@ -2,7 +2,8 @@ var express = require('express');
 const bcrypt = require('bcrypt');
 
 let Login = require('../models/login');
-var express = require('express-session');
+
+var session = require('express-session');
 
 var routes = express.Router();
 
@@ -44,11 +45,9 @@ routes.post('/login', (req, res)=>{
                 console.log(err);
             };
             if(isMatch){
-                /*
-                    session.username = username
-                    session.weakness = weakness
-                */
-                res.render('', user)
+                req.session.username = info.username;
+                req.session.weakness = info.weakness;
+                res.render('')
             }
         })
     })
