@@ -24,6 +24,7 @@
     "express": "^4.17.1",
     "express-fileupload": "^1.1.6-alpha.5",
     "express-session": "^1.16.2",
+    "express-validator": "^6.2.0",
     "mongoose": "^5.7.1"
   }
 }
