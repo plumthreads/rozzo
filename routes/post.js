@@ -1,6 +1,7 @@
 var express = require('express');
 var expressfileupload = require('express-fileupload')
 var vision = require('@google-cloud/vision')
+var translate = require('@google-cloud/translate')
 var bcrypt = require('bcrypt');
 //var session = require('express-session');
 
@@ -10,7 +11,7 @@ let Login = require('../models/login');
 var routes = express.Router();
 
 const clients = new vision.ImageAnnotatorClient();
-
+const clientt = new translate.Translate();
 //handles post request
 async function textdetect(req){
     //clients.documentTextDetection(req).then((resp)=>{
@@ -19,7 +20,7 @@ async function textdetect(req){
     return clients.textDetection(req).then(([detections])=>{
         const annotation = detections.textAnnotations[0];
         text = annotation ? annotation.description : '';
-        
+        text=clientt.translate(text,'en');
         return text
     })
     
@@ -92,3 +93,7 @@ routes.post('/upload', (req, res)=>{
 </form>
 */
 module.exports = routes;
+
+module.exports = {
+    textdetect: textdetect
+}
