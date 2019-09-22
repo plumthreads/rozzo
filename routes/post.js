@@ -15,12 +15,12 @@ routes.post('/createAccount', (req, res) => {
         weakness: req.body.weakness
     };
 
-    let userInfo = new login(user);
-
-    userInfo.save(function(err){
+    let login = new Login(user);
+    login.save(function(err){
         if(err){
-            console.log("error");
+            console.log(err);
         } else{
+            console.log('added')
             res.render('index')
         }
     })
@@ -36,12 +36,16 @@ routes.post('/login', (req, res)=>{
         if(err){
             console.log("Something wrong with login");
         };
+        console.log(info);
         bcrypt.compare(password, info.password, function(err, isMatch){
             if(err){
                 console.log("pass error");
+                console.log(err);
             };
             if(isMatch){
-                res.render('', user)
+                req.session.username = info.username;
+                req.session.weakness = info.weakness;
+                res.render('')
             }
         })
     })
