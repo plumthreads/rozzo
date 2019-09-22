@@ -1,14 +1,18 @@
 var express = require('express');
 var expressfileupload = require('express-fileupload')
 var vision = require('@google-cloud/vision')
-let login = require('../models/login');
+
+let Login = require('../models/login');
 
 var routes = express.Router();
 
-const clients = vision.ImageAnnotatorClient();
+const clients = new vision.ImageAnnotatorClient();
+
 //handles post request
 routes.post('/createAccount', (req, res) => {
-    //method = post  action = creatAccount
+    //var weakness = req.body.weakness;
+    //var str = weakness.split(', ');
+
     user = {
         username: req.body.username,
         password: req.body.password,

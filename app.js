@@ -20,14 +20,12 @@ db.on('error', function (err) {
 
 var app = express();
 
-
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 //Body Parser Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-
 
 //session midedleware
 app.use(session({
@@ -48,5 +46,5 @@ app.use(post);
 
 
 app.listen(5500, ()=>{
-    console.log("Server is on port 57");
+    console.log("Server is on port 5500");
 })
