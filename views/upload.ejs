@@ -10,36 +10,45 @@
   
 <body>
   <div class="header">
-   <div style="display: flex; flex-direction: row;
-  align-items: center;">
- <a  style="all: initial" href= "/index" > <img src="logo.svg" style="filter: invert(1); width: 20vw;"></img></a>     <h1>
+   <div style="display: flex; flex-direction: row; align-items: center;">
+ <a  style="all: initial" href= "/index.html" > <img src="logo.svg" style="filter: invert(1); width: 20vw;"></img></a>     <h1>
     Allergy Detection
      </h1>
 </div>
 <img src="avatar.png" style="filter: invert(1); width: 10vw;"></img>
 </div>
-    <form>
-        <ul class = "flex-o">
-         <li>
-           <button type= "button">
-             Upload
-           </button>
-         </li>
+
+<div class="body">
+
+           <form style="display: flex; flex-direction: column" action="/upload" method="post" enctype="multipart/form-data">
+          <div>
+        <input  id="image" type="file" accept="image/*" name="photo">
+  </div> <div>
+        <button type="submit">Check Ingredients!</button>
+        </div>
+          </form>
+
+        
+ 
+
+           <h1>Avoid eating this food!</h1>
            <ul>
-             <li>
-               <span>Ingredient</span>
-               <span><img src = "Warning.png"></span>
+             <li class="conflictList">
+               <span>Ingredient 1 </span>
+               <!-- <span style="color: yellow">!</span> -->
+               <span style="color: red">x</span>
+               </li>
+                <li class="conflictList">
+               <span>Ingredient 2</span>
+               <!-- <span style="color: yellow">!</span> -->
+               <span style="color: red">x</span>
+               </li>
            </ul>
-         <li>
-           <textarea id = "weaknesses" placeholder="Weaknesses" readonly></textarea>
-          </li>
-         <li>
+           <textarea id = "avoidances" placeholder="Food Avoidances" readonly></textarea>
+          
            <div>
            <textarea id = "detected" placeholder="Detected text" readonly></textarea>
            </div>
-         </li>
-         
-        </ul>
-    </form>
+       </div>
 </body>
 </html>

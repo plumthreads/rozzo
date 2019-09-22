@@ -1,6 +1,8 @@
 var express = require('express');
 var expressfileupload = require('express-fileupload')
 var vision = require('@google-cloud/vision')
+var bcrypt = require('bcrypt');
+//var session = require('express-session');
 
 let Login = require('../models/login');
 
@@ -24,7 +26,7 @@ routes.post('/createAccount', (req, res) => {
             console.log(err);
         } else{
             console.log('added')
-            res.render('index')
+            res.render('login')
         }
     })
 });
@@ -33,24 +35,28 @@ routes.post('/login', (req, res)=>{
     var username = req.body.username;
     var password = req.body.password;
 
+    console.log(req.body.username)
+    console.log(req.body.password)
+
     let query = {username: username};
 
-    login.find(query, (err, info)=>{
-        if(err){
-            console.log("Something wrong with login");
-        };
-        console.log(info);
-        bcrypt.compare(password, info.password, function(err, isMatch){
-            if(err){
-                console.log("pass error");
-                console.log(err);
-            };
-            if(isMatch){
-                req.session.username = info.username;
-                req.session.weakness = info.weakness;
-                res.render('')
-            }
-        })
+    Login.findOne(query, function (err, user) {
+        if (user === null) {
+            res.render('login', {
+                message: 'No user found'
+            });
+        } else {
+            bcrypt.compare(password, user.password, function (err, isMatch) {
+                if (err) {
+                    console.log("Error");
+                };
+                if (isMatch) {
+                    req.session.username = user.username;
+                    req.session.weakness = user.weakness;
+                    res.render('profile', req.session)
+                }
+            })
+        }
     })
 })
 routes.post('/upload', (req, res)=>{

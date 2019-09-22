@@ -5,13 +5,42 @@
 	<link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="main.css">
 
+
+<script>
+
+function presetAdd(){
+var e = document.getElementById("presetDropdown");
+var avoidanceTextArea = document.getElementById("avoidances");
+
+var strUser = e.options[e.selectedIndex].value;
+
+  var alltext = avoidanceTextArea.value;
+    
+
+if(strUser == "Dairy"){
+alltext += ", butter, buttermilk, casein, caseinates, cheese, cream, curds, diacetyl, ghee, lactalbumin, lactoferrin, lactose, milk, pudding, recaldent, rennet, sour cream, tagatose, whey, yogurt"
+}
+else if (strUser == "Nuts"){
+  alltext += ", almond, brazel nut, cacao, cashew, chestnut, coconut, hazelnut, macadamia nut, peanut, pecan,pili nut, pine nut, pistachio, soy nut, walnut, tiger nut, baru nut"
+}
+else if (strUser == "Shellfish"){
+  alltext += ", crab, crawfish, krill, lobster, prawns, shrimp, abalone, clams, cockle, cuttlefish, limpet, mussels, octopus, oysters, periwinkle, sea cucumber, sea urchin, scallops, snails, squid, whelk"
+}
+
+avoidanceTextArea.value = alltext;
+
+
+}
+
+</script>
+
 </head>
 
 <body>
 	<div class="header">
 		<div style="display: flex; flex-direction: row;
   align-items: center;">
-			<a style="all: initial" href="/index"> <img src="logo.svg" style="filter: invert(1); width: 20vw;"></img></a>
+			<a style="all: initial" href="/index.html"> <img src="logo.svg" style="filter: invert(1); width: 20vw;"></img></a>
       <h1>
         Allergy Detection
       </h1>

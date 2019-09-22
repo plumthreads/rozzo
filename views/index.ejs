@@ -7,6 +7,35 @@
     <title>Rozzo</title>
     <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="main.css">
+<script>
+
+function presetAdd(){
+var e = document.getElementById("presetDropdown");
+var avoidanceTextArea = document.getElementById("avoidances");
+
+var strUser = e.options[e.selectedIndex].value;
+
+  var alltext = avoidanceTextArea.value;
+    
+
+if(strUser == "Dairy"){
+alltext += ", butter, buttermilk, casein, caseinates, cheese, cream, curds, diacetyl, ghee, lactalbumin, lactoferrin, lactose, milk, pudding, recaldent, rennet, sour cream, tagatose, whey, yogurt"
+}
+else if (strUser == "Nuts"){
+  alltext += ", almond, brazel nut, cacao, cashew, chestnut, coconut, hazelnut, macadamia nut, peanut, pecan,pili nut, pine nut, pistachio, soy nut, walnut, tiger nut, baru nut"
+}
+else if (strUser == "Shellfish"){
+  alltext += ", crab, crawfish, krill, lobster, prawns, shrimp, abalone, clams, cockle, cuttlefish, limpet, mussels, octopus, oysters, periwinkle, sea cucumber, sea urchin, scallops, snails, squid, whelk"
+}
+
+avoidanceTextArea.value = alltext;
+
+
+}
+
+</script>
+
+
 
 </head>
 
@@ -24,7 +53,7 @@
             </h1>
         </div>
 
-        <a href="/login">
+        <a href="/login.html">
             Login
         </a>
 
@@ -41,37 +70,32 @@
 
         <h2>Sign Up!</h2>
 
-        <form class="sign-up-form " method = "POST" action = '/createAccount'>
+        <form class="sign-up-form ">
 
             <input type="text" name="username" placeholder="Username">
 
             <input type="password" name="password" placeholder="Password">
 
             <div style="display: flex; flex-direction: row; flex-wrap: nowrap;">
-                <textarea id="weakness" placeholder="What can't you eat?"></textarea>
+                <textarea name = "weaknesse" id="avoidances" placeholder="What can't you eat? (comma seperated)"></textarea>
             </div>
 
             <div style="display: flex; flex-direction: row; align-items:center ">
 
 
 
-                <select>
-                    <option value="placeholder">Dairy</option>
-                    <option value="placeholder">Hallal</option>
-                    <option value="placeholder">Kosher</option>
-                    <option value="placeholder">Nuts</option>
-                    <option value="placeholder">Shellfish</option>
-                    <option value="placeholder">Vegan</option>
-
-
+                <select id="presetDropdown">
+                    <option value="Dairy">Dairy</option>
+                    <option value="Nuts">Nuts</option>
+                    <option value="Shellfish">Shellfish</option>
                 </select>
 
-                <button type="button" style="font-size: 15px;">Add Preset</button>
+                <button onclick="presetAdd()" type="button" style="font-size: 15px;">Add Preset</button>
 
 
             </div>
 
-            <button  type="submit">Chow Down!</button>
+            <button  type="button">Chow Down!</button>
 
 
         </form>
@@ -82,8 +106,8 @@
 
     <div>
 
-        <a href="/profile">Profile</a>
-        <a href="/upload">Upload</a>
+        <a href="/profile.html">Profile</a>
+        <a href="/upload.html">Upload</a>
 
 
     </div>
