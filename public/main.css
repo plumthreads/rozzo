@@ -1,0 +1,137 @@
+* {
+  
+  font-family: 'Raleway', sans-serif;
+
+
+}
+
+body {
+  margin: 0;
+}
+
+p{
+    padding: 1vw;
+    font-size: 25px;
+    max-width: 800px;
+    text-align: center;
+}
+
+
+
+.header {
+  padding: 1vw;
+  display: flex;
+  background-color: #FFBA24;
+  flex-direction: row;
+  align-items: center;
+  color: white;
+  justify-content: space-between;
+
+}
+
+.body {
+  text-align: center;
+    align-items: center;
+}
+
+.sign-up-form {
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  text-align: center;
+}
+
+input{
+  font-size: 25px;
+  
+}
+
+input, textarea, select{
+    margin: 1vw;
+
+}
+
+textarea{
+  font-size: 25px;
+  height: 20vh;
+  
+}
+
+
+button {
+  padding: 0;
+border: none;
+background: none;
+}
+button, a {
+  text-decoration: none;
+  transition-property: color, background-color;
+  transition-duration: .5s;
+  transition-timing-function: ease;
+  
+  background-color: #63C3FF;
+  color: #FFFFFF;
+  padding: 1vw;
+    font-size: 25px;
+}
+
+button:hover, a:hover {
+  
+  color: #63C3FF;
+  background-color: #FFFFFF;
+  
+  
+}
+.flex-o li{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 2%
+}
+.flex-o > li > label{
+  flex: 1 0 120px;
+  max-width: 220px;
+}
+
+.flex-o > li > label + *{
+  flex: 1 0 220px;
+}
+
+select::-ms-expand {
+
+  display: none;
+}
+select {
+
+    outline: none;
+
+  display: inline-block;
+  box-sizing: border-box;
+  padding: 0.5em 2em 0.5em 0.5em;
+  border: 1px solid #eee;
+  font: inherit;
+  line-height: inherit;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  background-repeat: no-repeat;
+  background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position: right 15px top 1em, right 10px top 1em;
+  background-size: 5px 5px, 5px 5px;
+}
+
+.red-btn {
+
+  background-color: red;
+  color: white;
+}
+
+.red-btn:hover {
+
+  background-color: white;
+  color: red;
+
+}
