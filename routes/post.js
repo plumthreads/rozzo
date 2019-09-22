@@ -7,6 +7,12 @@ var routes = express.Router();
 
 const clients = vision.ImageAnnotatorClient();
 //handles post request
+function textdetect(req){
+    clients.documentTextDetection(req).then(resp=>{
+     return resp
+    })
+}
+
 routes.post('/createAccount', (req, res) => {
     //method = post  action = creatAccount
     user = {
@@ -53,9 +59,7 @@ routes.post('/login', (req, res)=>{
 routes.post('/upload', (req, res)=>{
     var name = req.files.images.name;
     var image = req.files.images.data;
-    clients.documentTextDetection(req).then(resp=>{
-        
-    })
+    print(textdetect(image));
 })
 
 /*
