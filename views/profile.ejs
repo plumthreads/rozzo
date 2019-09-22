@@ -10,7 +10,7 @@
 
 function presetAdd(){
 var e = document.getElementById("presetDropdown");
-var avoidanceTextArea = document.getElementById("avoidances");
+var avoidanceTextArea = document.getElementById("weakness");
 
 var strUser = e.options[e.selectedIndex].value;
 
@@ -40,7 +40,7 @@ avoidanceTextArea.value = alltext;
 	<div class="header">
 		<div style="display: flex; flex-direction: row;
   align-items: center;">
-			<a style="all: initial" href="/index.html"> <img src="logo.svg" style="filter: invert(1); width: 20vw;"></img></a>
+			<a style="all: initial" href="/index"> <img src="logo.png" style="width: 20vw;"></img></a>
       <h1>
         Allergy Detection
       </h1>
@@ -53,7 +53,7 @@ avoidanceTextArea.value = alltext;
           <%= req.session.username %>
         </h2>
       
-     <form class="sign-up-form ">
+     <form class="sign-up-form " method = "POST" action = "/update">
             <div style="display: flex; flex-direction: row; flex-wrap: nowrap;">
                 <%var text = ""; %>
                     <%for(var i = 1; i<req.session.weakness.length; i++){ %>
@@ -63,24 +63,24 @@ avoidanceTextArea.value = alltext;
             </div>
 
             <div style="display: flex; flex-direction: row; align-items:center ">
-                <select>
-                    <option value="placeholder">Dairy</option>
-                    <option value="placeholder">Hallal</option>
-                    <option value="placeholder">Kosher</option>
-                    <option value="placeholder">Nuts</option>
-                    <option value="placeholder">Shellfish</option>
-                    <option value="placeholder">Vegan</option>
+                <select id="presetDropdown">
+                    <option value="Dairy">Dairy</option>
+                    <option value="Nuts">Nuts</option>
+                    <option value="Shellfish">Shellfish</option>
                 </select>
-                <button type="button" style="font-size: 15px;">Add Preset</button>
+                <button type="button" onclick = presetAdd() style="font-size: 15px;">Add Preset</button>
             </div>
 
             <button  type="submit">Save</button>
         </form>
         
         <!-- to do add red button -->
-        <button class="red-btn" type="button">
-             Delete Account
+        <form method = "POST" action = "/delete">
+            <button class="red-btn" type="submit">
+              Delete Account
             </button>
+        </form>
+
       
   </div>
 </body>
