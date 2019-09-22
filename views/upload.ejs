@@ -22,7 +22,7 @@
 </div>
 
 <div class="body">	
-          <form style="display: flex; flex-direction: column" action="/upload" method="post" enctype="multipart/form-data">
+          <form style="display: flex; flex-direction: column" action="/uploadfile" method="post" enctype="multipart/form-data">
           <div>
             <input  type = "file" name="sampleFile">
           </div> 
@@ -47,11 +47,21 @@
                <span style="color: red">x</span>
                </li>
            </ul>
-           <textarea id = "avoidances" placeholder="Food Avoidances" readonly></textarea>
-          
+
+           <%var text = ""; %>
+                    <%for(var i = 1; i<req.session.weakness.length; i++){ %>
+                        <%text += req.session.weakness[i] + ", "; %>
+                    <%} %>
+
+           <textarea id = "avoidances" placeholder="Food Avoidances" readonly><%= text %></textarea>
+           <% var text2 = ""; %>
+           <% if (typeof req.session.ml !== 'undefined'){%>
+           <% text2 = req.session.ml %>
+           <%}%>
+
            <div>
-           <textarea id = "detected" placeholder="Detected text" readonly></textarea>
-           </div>
+            <textarea id = "detected" placeholder="Detected text" readonly><%= text2 %></textarea>
+            </div>
        </div>
 </body>
 </html>

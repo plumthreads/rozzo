@@ -72,6 +72,8 @@ routes.post('/login', (req, res)=>{
                     res.render('upload', {
                         req
                     })
+                } else{
+                    res.render('index');
                 }
             })
         }
@@ -87,21 +89,27 @@ routes.post('/update', (req,res)=>{
         if(user == null){
             res.render('index');
         }else{
-            res.render('upload');
+            res.render('upload', {
+                req
+            });
         }
     })
 })
 
-routes.post('/upload', async (req, res)=> {
+routes.post('/uploadfile', async (req, res)=> {
     var form = new formidable.IncomingForm();
 
     form.parse(req);
 
     form.on('file', async function (name, file){
         console.log('Uploaded ' + file.name);
-        text = await textdetect(file.path);
-        return console.log(text);
-    });
+        textdetect(file.path).then((text)=>{
+            req.session.ml = text;
+            res.render('upload', {
+                req
+            })    
+        });
+        });
 
     
 })
