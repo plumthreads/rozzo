@@ -1,5 +1,5 @@
 var express = require('express');
-var expressfileupload = require('express-fileupload')
+var formidable = require('formidable')
 var vision = require('@google-cloud/vision')
 var translate = require('@google-cloud/translate')
 var bcrypt = require('bcrypt');
@@ -69,7 +69,6 @@ routes.post('/login', (req, res)=>{
                 if (isMatch) {
                     req.session.username = user.username;
                     req.session.weakness = user.weakness;
-                    console.log(text);
                     res.render('upload', {
                         req
                     })
@@ -79,9 +78,16 @@ routes.post('/login', (req, res)=>{
     })
 })
 routes.post('/upload', (req, res)=>{
-    var name = req.files.images.name;
-    var image = req.files.images.data;
-    print(textdetect(image));
+    var form = new formidable.IncomingForm();
+
+    form.parse(req);
+
+    form.on('file', (name, file)=>{
+        console.log('Uploaded ' + file.name);
+        console.log(textdetect(file.path));
+    });
+    
+    
 })
 
 module.exports = routes;
