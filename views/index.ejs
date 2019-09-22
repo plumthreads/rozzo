@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Rozzo</title>
+    <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="main.css">
+<script>
+
+function presetAdd(){
+var e = document.getElementById("presetDropdown");
+var avoidanceTextArea = document.getElementById("avoidances");
+
+var strUser = e.options[e.selectedIndex].value;
+
+  var alltext = avoidanceTextArea.value;
+    
+
+if(strUser == "Dairy"){
+alltext += ", butter, buttermilk, casein, caseinates, cheese, cream, curds, diacetyl, ghee, lactalbumin, lactoferrin, lactose, milk, pudding, recaldent, rennet, sour cream, tagatose, whey, yogurt"
+}
+else if (strUser == "Nuts"){
+  alltext += ", almond, brazel nut, cacao, cashew, chestnut, coconut, hazelnut, macadamia nut, peanut, pecan,pili nut, pine nut, pistachio, soy nut, walnut, tiger nut, baru nut"
+}
+else if (strUser == "Shellfish"){
+  alltext += ", crab, crawfish, krill, lobster, prawns, shrimp, abalone, clams, cockle, cuttlefish, limpet, mussels, octopus, oysters, periwinkle, sea cucumber, sea urchin, scallops, snails, squid, whelk"
+}
+
+avoidanceTextArea.value = alltext;
+
+
+}
+
+</script>
+
+
+
+</head>
+
+<body>
+
+    <div class="header">
+        <div style="display: flex; flex-direction: row;
+  align-items: center;">
+
+
+            <img src="logo.png" style="width: 20vw;">
+
+            <h1>
+                Allergy Detection
+            </h1>
+        </div>
+
+        <a href="/login  ">
+            Login
+        </a>
+
+    </div>
+
+    <div class="body">
+
+
+        <p style="margin: 0 auto; text-align: center;">
+            Rozzo Allergy Detection is a hackathon-built webapp designed to create ease of use in protecting 
+            people who have allergies. Rozzo stands for Realtime Optical Zoning for Zero Oofs. Using Machine 
+            Learning and Optical Character Recognitions, users can quickly scan ingredient lists from any 
+            foods, including in different languages! It will generate a list of ingredients the user is 
+            allergic to in order to keep every client safe and use technology for the good!
+        </p>
+
+        <h2>Sign Up!</h2>
+
+        <form class="sign-up-form " method = "POST" action = "/createAccount">
+
+            <input type="text" name="username" placeholder="Username">  
+
+            <input type="password" name="password" placeholder="Password">
+
+            <div style="display: flex; flex-direction: row; flex-wrap: nowrap;">
+                <textarea name="weakness" id="avoidances" placeholder="What can't you eat? (comma seperated)"></textarea>
+            </div>
+
+            <div style="display: flex; flex-direction: row; align-items:center ">
+
+
+
+                <select id="presetDropdown">
+                    <option value="Dairy">Dairy</option>
+                    <option value="Nuts">Nuts</option>
+                    <option value="Shellfish">Shellfish</option>
+                </select>
+
+                <button onclick="presetAdd()" type="button" style="font-size: 15px;">Add Preset</button>
+
+
+            </div>
+
+            <button  type="submit">Chow Down!</button>
+
+
+        </form>
+
+
+
+    </div>
+</body>
+
+</html>
