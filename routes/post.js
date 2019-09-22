@@ -3,6 +3,8 @@ var vision = require('@google-cloud/vision')
 var translate = require('@google-cloud/translate')
 var storage = require('@google-cloud/storage')
 var bcrypt = require('bcrypt');
+var cloud = require('cloudinary').v2;
+var formidable = require('formidable')
 //var session = require('express-session');
 
 
@@ -91,8 +93,17 @@ routes.post('/update', (req,res)=>{
 })
 
 routes.post('/upload', async (req, res)=> {
-    text = await textdetect("./sample/kitkat_wasabi_ing.jpg");
-    return console.log(text);
+    var form = new formidable.IncomingForm();
+
+    form.parse(req);
+
+    form.on('file', async function (name, file){
+        console.log('Uploaded ' + file.name);
+        text = await textdetect(file.path);
+        return console.log(text);
+    });
+
+    
 })
 
 routes.post('/delete', (req, res)=>{
