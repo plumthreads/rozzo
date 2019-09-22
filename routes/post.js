@@ -9,10 +9,12 @@ var routes = express.Router();
 const clients = new vision.ImageAnnotatorClient();
 
 //handles post request
-function textdetect(req){
-    clients.documentTextDetection(req).then(resp=>{
-     return resp
-    })
+async function textdetect(req){
+    //clients.documentTextDetection(req).then((resp)=>{
+    // return resp
+    //})
+    var [result] = await clients.textDetection(req);
+    return result;
 }
 
 routes.post('/createAccount', (req, res) => {
@@ -78,3 +80,8 @@ routes.post('/upload', (req, res)=>{
 </form>
 */
 module.exports = routes;
+
+
+module.exports = {
+    textdetect: textdetect
+}
