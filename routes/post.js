@@ -1,7 +1,7 @@
 var express = require('express');
-var formidable = require('formidable')
 var vision = require('@google-cloud/vision')
 var translate = require('@google-cloud/translate')
+var storage = require('@google-cloud/storage')
 var bcrypt = require('bcrypt');
 //var session = require('express-session');
 
@@ -12,6 +12,7 @@ var routes = express.Router();
 
 const clients = new vision.ImageAnnotatorClient();
 const clientt = new translate.Translate();
+const fileclient = new storage.Storage();
 //handles post request
 async function textdetect(req){
     //clients.documentTextDetection(req).then((resp)=>{
@@ -89,12 +90,12 @@ routes.post('/update', (req,res)=>{
     })
 })
 
-routes.post('/upload', (req, res)=> {
-    var sampleFile = req.files.sampleFile;
-    console.log(sampleFile.data)
+routes.post('/upload', async (req, res)=> {
+    text = await textdetect("./sample/kitkat_wasabi_ing.jpg");
+    return console.log(text);
 })
 
-routes.post('/delete', (req, res=>{
+routes.post('/delete', (req, res)=>{
     let query = {username: req.session.username}
     
     Login.deleteOne(query, (err)=>{
@@ -104,35 +105,10 @@ routes.post('/delete', (req, res=>{
 
         res.render(index);
     })
-}))
-module.exports = routes;
-
-routes.post('/upload', (req, res)=>{
-    var form = new formidable.IncomingForm();
-
-    form.parse(req);
-
-    form.on('file', (name, file)=>{
-        console.log('Uploaded ' + file.name);
-        console.log(textdetect(file.path));
-    });
-    
-    
 })
-
-
-
-
-var assert = require('assert');
-const postjs = require('./post')
-const file = require('fs')
-it('should return the text from the image', async function () {
-        //file.readFile('../sample/almond_milk_ing.jpg',(err,image)=>{
-        //    let text=postjs.textdetect(image)
-        //    console.log(text);
-        //})
-        var text =  await postjs.textdetect('../sample/kitkat_wasabi_ing.jpg')
-        await console.log(text);
-    }); 
-
 module.exports = routes;
+
+
+
+
+
