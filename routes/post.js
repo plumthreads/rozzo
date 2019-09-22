@@ -34,7 +34,7 @@ routes.post('/createAccount', (req, res) => {
         password: req.body.password,
         weakness: list
     };
-
+    
     let login = new Login(user);
     login.save(function(err){
         if(err){    
@@ -49,9 +49,6 @@ routes.post('/createAccount', (req, res) => {
 routes.post('/login', (req, res)=>{
     var username = req.body.username;
     var password = req.body.password;
-
-    console.log(req.body.username)
-    console.log(req.body.password)
 
     let query = {username: username};
 
@@ -68,7 +65,6 @@ routes.post('/login', (req, res)=>{
                 if (isMatch) {
                     req.session.username = user.username;
                     req.session.weakness = user.weakness;
-                    console.log(text);
                     res.render('upload', {
                         req
                     })
@@ -77,10 +73,58 @@ routes.post('/login', (req, res)=>{
         }
     })
 })
+
+routes.post('/update', (req,res)=>{
+    let query = {username: req.session.username}
+    Login.findOne(query, (err, user)=>{
+        if(err){
+            console.log(err)
+        };
+        if(user == null){
+            res.render('index');
+        }else{
+            res.render('upload');
+        }
+    })
+})
+
+routes.post('/upload', (req, res)=> {
+    var sampleFile = req.files.sampleFile;
+    console.log(sampleFile.data)
+})
+
+routes.post('/delete', (req, res=>{
+    let query = {username: req.session.username}
+    
+    Login.deleteOne(query, (err)=>{
+        if(err){
+            console.log(err);
+        }
+
+        res.render(index);
+    })
+}))
+module.exports = routes;
+/*
 routes.post('/upload', (req, res)=>{
-    var name = req.files.images.name;
-    var image = req.files.images.data;
+    console.log(req.files);
+    var image = req.files.photo.data;
     print(textdetect(image));
 })
 
 module.exports = routes;
+
+/*
+var assert = require('assert');
+const postjs = require('./post')
+const file = require('fs')
+it('should return the text from the image', async function () {
+        //file.readFile('../sample/almond_milk_ing.jpg',(err,image)=>{
+        //    let text=postjs.textdetect(image)
+        //    console.log(text);
+        //})
+        var text =  await postjs.textdetect('../sample/kitkat_wasabi_ing.jpg')
+        await console.log(text);
+    }); 
+
+*/

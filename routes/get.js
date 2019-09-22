@@ -5,12 +5,18 @@ router.get('/', (req, res)=>{
     res.render('index');
 })
 
+router.get('/index', (req,res)=>{
+	res.render('index')
+})
+
 router.get('/login', (req, res)=>{
 	res.render('login');
 })
 
 router.get('/profile', (req, res)=>{
-	res.render('profile')
+	res.render('profile', {
+		req
+	})
 })
 
 router.get('/upload', (req, res)=>{
