@@ -4,6 +4,7 @@ var vision = require('@google-cloud/vision')
 var bcrypt = require('bcrypt');
 //var session = require('express-session');
 
+
 let Login = require('../models/login');
 
 var routes = express.Router();
@@ -15,8 +16,13 @@ async function textdetect(req){
     //clients.documentTextDetection(req).then((resp)=>{
     // return resp
     //})
-    var [result] = await clients.textDetection(req);
-    return result;
+    return clients.textDetection(req).then(([detections])=>{
+        const annotation = detections.textAnnotations[0];
+        text = annotation ? annotation.description : '';
+        
+        return text
+    })
+    
 }
 
 routes.post('/createAccount', (req, res) => {
