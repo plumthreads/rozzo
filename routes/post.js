@@ -20,20 +20,19 @@ async function textdetect(req){
 }
 
 routes.post('/createAccount', (req, res) => {
-    //var weakness = req.body.weakness;
-    //var str = weakness.split(', ');
     user = {
         username: req.body.username,
         password: req.body.password,
         weakness: req.body.weakness
     };
-
+    console.log(req.body.weakness)
     let login = new Login(user);
     login.save(function(err){
-        if(err){
+        if(err){    
             console.log(err);
         } else{
-            console.log('added')
+            console.log(login);
+            console.log('next page');
             res.render('login')
         }
     })
@@ -61,7 +60,9 @@ routes.post('/login', (req, res)=>{
                 if (isMatch) {
                     req.session.username = user.username;
                     req.session.weakness = user.weakness;
-                    res.render('profile', req.session)
+                    res.render('profile', {
+                        req
+                    })
                 }
             })
         }
@@ -85,8 +86,3 @@ routes.post('/upload', (req, res)=>{
 </form>
 */
 module.exports = routes;
-
-
-module.exports = {
-    textdetect: textdetect
-}
