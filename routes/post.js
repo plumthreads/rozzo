@@ -1,10 +1,12 @@
 var express = require('express');
 let login = require('../models/login');
-
+var express = require('express-session');
 var routes = express.Router();
+
 
 //handles post request
 routes.post('/createAccount', (req, res) => {
+	
     //method = post  action = creatAccount
     user = {
         username: req.body.username,
@@ -42,11 +44,6 @@ routes.post('/login', (req, res)=>{
             }
         })
     })
-})
-routes.post('/upload', (req, res)=>{
-    var name = req.files.images.name;
-    var image = req.files.images.data;
-    
 })
 /*
 <form class="sign-up-form ">
