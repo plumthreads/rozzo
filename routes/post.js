@@ -104,17 +104,13 @@ routes.post('/delete', (req, res=>{
         res.render(index);
     })
 }))
-module.exports = routes;
-/*
+
 routes.post('/upload', (req, res)=>{
     console.log(req.files);
     var image = req.files.photo.data;
     print(textdetect(image));
 })
 
-module.exports = routes;
-
-/*
 var assert = require('assert');
 const postjs = require('./post')
 const file = require('fs')
@@ -127,4 +123,5 @@ it('should return the text from the image', async function () {
         await console.log(text);
     }); 
 
-*/
+
+module.exports = routes;
