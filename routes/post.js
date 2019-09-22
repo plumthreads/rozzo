@@ -11,6 +11,14 @@ var routes = express.Router();
 const clients = new vision.ImageAnnotatorClient();
 
 //handles post request
+async function textdetect(req){
+    //clients.documentTextDetection(req).then((resp)=>{
+    // return resp
+    //})
+    var [result] = await clients.textDetection(req);
+    return result;
+}
+
 routes.post('/createAccount', (req, res) => {
     //var weakness = req.body.weakness;
     //var str = weakness.split(', ');
@@ -62,9 +70,7 @@ routes.post('/login', (req, res)=>{
 routes.post('/upload', (req, res)=>{
     var name = req.files.images.name;
     var image = req.files.images.data;
-    clients.documentTextDetection(req).then(resp=>{
-        
-    })
+    print(textdetect(image));
 })
 
 /*
@@ -79,3 +85,8 @@ routes.post('/upload', (req, res)=>{
 </form>
 */
 module.exports = routes;
+
+
+module.exports = {
+    textdetect: textdetect
+}
