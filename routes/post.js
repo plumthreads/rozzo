@@ -1,6 +1,7 @@
 var express = require('express');
-var expressfileupload = require('express-fileupload')
+var formidable = require('formidable')
 var vision = require('@google-cloud/vision')
+var translate = require('@google-cloud/translate')
 var bcrypt = require('bcrypt');
 //var session = require('express-session');
 
@@ -10,7 +11,7 @@ let Login = require('../models/login');
 var routes = express.Router();
 
 const clients = new vision.ImageAnnotatorClient();
-
+const clientt = new translate.Translate();
 //handles post request
 async function textdetect(req){
     //clients.documentTextDetection(req).then((resp)=>{
@@ -19,7 +20,7 @@ async function textdetect(req){
     return clients.textDetection(req).then(([detections])=>{
         const annotation = detections.textAnnotations[0];
         text = annotation ? annotation.description : '';
-        
+        text=clientt.translate(text,'en');
         return text
     })
     
@@ -106,9 +107,16 @@ routes.post('/delete', (req, res=>{
 }))
 
 routes.post('/upload', (req, res)=>{
-    console.log(req.files);
-    var image = req.files.photo.data;
-    print(textdetect(image));
+    var form = new formidable.IncomingForm();
+
+    form.parse(req);
+
+    form.on('file', (name, file)=>{
+        console.log('Uploaded ' + file.name);
+        console.log(textdetect(file.path));
+    });
+    
+    
 })
 
 var assert = require('assert');
@@ -122,6 +130,5 @@ it('should return the text from the image', async function () {
         var text =  await postjs.textdetect('../sample/kitkat_wasabi_ing.jpg')
         await console.log(text);
     }); 
-
 
 module.exports = routes;
