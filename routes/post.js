@@ -12,7 +12,6 @@ const clients = new vision.ImageAnnotatorClient();
 routes.post('/createAccount', (req, res) => {
     //var weakness = req.body.weakness;
     //var str = weakness.split(', ');
-
     user = {
         username: req.body.username,
         password: req.body.password,

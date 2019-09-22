@@ -41,13 +41,11 @@
 
         <h2>Sign Up!</h2>
 
-        <form class="sign-up-form " method = POST action = 'createAccount'>
+        <form class="sign-up-form " method = "POST" action = '/createAccount'>
 
-            <input type="text" id="username" placeholder="Username">
+            <input type="text" name="username" placeholder="Username">
 
-            <input type="password" id="password" placeholder="Password">
-
-            <input type="password" id="confirmPassword" placeholder="Retype Password">
+            <input type="password" name="password" placeholder="Password">
 
             <div style="display: flex; flex-direction: row; flex-wrap: nowrap;">
                 <textarea id="weakness" placeholder="What can't you eat?"></textarea>
