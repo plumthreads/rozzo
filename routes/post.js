@@ -1,8 +1,11 @@
 var express = require('express');
+var expressfileupload = require('express-fileupload')
+var vision = require('@google-cloud/vision')
 let login = require('../models/login');
 
 var routes = express.Router();
 
+const clients = vision.ImageAnnotatorClient();
 //handles post request
 routes.post('/createAccount', (req, res) => {
     //method = post  action = creatAccount
@@ -46,8 +49,11 @@ routes.post('/login', (req, res)=>{
 routes.post('/upload', (req, res)=>{
     var name = req.files.images.name;
     var image = req.files.images.data;
-    
+    clients.documentTextDetection(req).then(resp=>{
+        
+    })
 })
+
 /*
 <form class="sign-up-form ">
         
