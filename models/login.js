@@ -12,7 +12,7 @@ var Login = new mongoose.Schema({
         type: String
     },
     weakness: {
-        type: String
+        type: [Array]
     }
 });
 
@@ -20,7 +20,6 @@ var Login = new mongoose.Schema({
 //before inputs are save I need to ajust or assign predetermine values
 Login.pre('save', function (next) {
     var user = this;
-console.log(user);
     //For safely reason the password will be hashed
     bcrypt.hash(user.password, 10, function (err, hash){
       if (err) {
